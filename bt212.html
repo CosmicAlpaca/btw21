@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quản lý Sinh Viên</title>
+<style>
+body {
+    background-image: url('pics/100.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+</style>
+</head>
+<body>
+  <h1>Quản lý Sinh viên</h1>
+  
+  <label for="quantity">Nhập số lượng sinh viên:</label>
+  <input type="number" id="quantity" name="quantity" min="1">
+  <button onclick="createStudentList()">Nhập</button>
+
+  <table id="studentTable">
+    <thead>
+      <tr>
+        <th>Mã SV</th>
+        <th>Họ và tên</th>
+        <th>Ngày sinh</th>
+        <th>Lớp học</th>
+        <th>Điểm GPA</th>
+      </tr>
+    </thead>
+    <tbody id="studentList"></tbody>
+  </table>
+
+  <button onclick="displayStudentInfo()">Hiển thị thông tin sinh viên</button>
+
+  <script>
+    let studentList = [];
+
+    function createStudentList() {
+      let quantity = parseInt(document.getElementById("quantity").value);
+      for (let i = 0; i < quantity; i++) {
+        let student = {
+          maSV: prompt("Nhập mã sinh viên:"),
+          hoTen: prompt("Nhập họ và tên:"),
+          ngaySinh: prompt("Nhập ngày tháng năm sinh (dd/mm/yyyy):"),
+          lopHoc: prompt("Nhập lớp học:"),
+          diemGPA: parseFloat(prompt("Nhập điểm GPA:"))
+        };
+        studentList.push(student);
+      }
+      alert("Đã nhập thông tin sinh viên thành công!");
+    }
+
+    function displayStudentInfo() {
+      let tableBody = document.getElementById("studentList");
+      tableBody.innerHTML = "";
+
+      for (let i = 0; i < studentList.length; i++) {
+        let row = `<tr>
+                    <td>${studentList[i].maSV}</td>
+                    <td>${studentList[i].hoTen}</td>
+                    <td>${studentList[i].ngaySinh}</td>
+                    <td>${studentList[i].lopHoc}</td>
+                    <td>${studentList[i].diemGPA}</td>
+                  </tr>`;
+        tableBody.innerHTML += row;
+      }
+    }
+  </script>
+</body>
+</html>
